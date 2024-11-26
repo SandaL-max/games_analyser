@@ -12,8 +12,12 @@ with open("output.csv", "w") as file:
 # print(df.head())
 df = None
 with open("api.steampowered.com.json", "r") as file:
-    df = pd.DataFrame(json.load(file)["applist"]["apps"]).set_index("appid").drop_duplicates().sort_index()
+    df = (
+        pd.DataFrame(json.load(file)["applist"]["apps"])
+        .set_index("appid")
+        .drop_duplicates()
+        .sort_index()
+    )
 with open("output2.csv", "w") as file:
     file.write(df.to_csv(index_label="appid"))
 print(df)
-
